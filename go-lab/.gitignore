@@ -1,0 +1,37 @@
+# Compiled binaries and objects
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go-lab
+
+# Test / coverage artifacts
+*.prof
+coverage.out
+coverage.html
+cpu.prof
+mem.prof
+
+# Go workspace file (keep local)
+go.work
+go.work.sum
+
+# Build / dependency dirs (this lab uses only the stdlib, but just in case)
+/bin/
+/dist/
+vendor/
+
+# Editor & OS cruft
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Scratch / local notes
+scratch/
+*.local
