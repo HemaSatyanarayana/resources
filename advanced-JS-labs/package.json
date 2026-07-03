@@ -1,0 +1,14 @@
+{
+  "name": "advanced-js-labs",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Test-driven exercises for mastering advanced JavaScript: closures, timers, promises, and async patterns.",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.2"
+  }
+}

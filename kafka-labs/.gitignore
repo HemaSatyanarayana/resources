@@ -1,0 +1,38 @@
+# Compiled binaries and objects
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+kafka-labs
+
+# Test / coverage artifacts
+*.prof
+coverage.out
+coverage.html
+
+# Go workspace file (keep local)
+go.work
+go.work.sum
+
+# Build / dependency dirs
+/bin/
+/dist/
+vendor/
+
+# Local Kafka data (if you bind-mount the broker's data dir)
+kafka-data/
+
+# Editor & OS cruft
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Scratch / local notes
+scratch/
+*.local
