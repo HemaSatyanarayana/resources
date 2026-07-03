@@ -1,6 +1,11 @@
 // Package shapes drills structs, value vs pointer receivers, and embedding.
 package shapes
 
+import (
+	"fmt"
+	"math"
+)
+
 // NOTE: Circle.Area/Perimeter need "math" (math.Pi) and Box.Describe needs
 // "fmt". Add those imports yourself when you implement them.
 
@@ -12,12 +17,15 @@ type Rectangle struct {
 
 // Area returns width * height. Use a VALUE receiver — Area doesn't mutate.
 func (r Rectangle) Area() float64 {
-	panic("TODO: implement Rectangle.Area")
+	// panic("TODO: implement Rectangle.Area")
+	return r.Width * r.Height
 }
 
 // Perimeter returns 2 * (width + height).
 func (r Rectangle) Perimeter() float64 {
-	panic("TODO: implement Rectangle.Perimeter")
+	// panic("TODO: implement Rectangle.Perimeter")
+
+	return 2 * (r.Width + r.Height)
 }
 
 // Circle is defined by its radius.
@@ -27,12 +35,15 @@ type Circle struct {
 
 // Area returns π r². Use math.Pi.
 func (c Circle) Area() float64 {
-	panic("TODO: implement Circle.Area")
+	// panic("TODO: implement Circle.Area")
+
+	return math.Pi * c.Radius * c.Radius
 }
 
 // Perimeter returns the circumference, 2πr.
 func (c Circle) Perimeter() float64 {
-	panic("TODO: implement Circle.Perimeter")
+	// panic("TODO: implement Circle.Perimeter")
+	return 2 * math.Pi * c.Radius
 }
 
 // Counter accumulates a running total. Its zero value (count 0) is ready to use.
@@ -43,17 +54,20 @@ type Counter struct {
 // Inc increases the counter by 1. It MUST use a pointer receiver so the change
 // is visible to the caller.
 func (c *Counter) Inc() {
-	panic("TODO: implement Counter.Inc")
+	// panic("TODO: implement Counter.Inc")
+	c.count++
 }
 
 // Add increases the counter by n (pointer receiver).
 func (c *Counter) Add(n int) {
-	panic("TODO: implement Counter.Add")
+	// panic("TODO: implement Counter.Add")
+	c.count += n
 }
 
 // Value returns the current count (value receiver is fine — read only).
 func (c Counter) Value() int {
-	panic("TODO: implement Counter.Value")
+	// panic("TODO: implement Counter.Value")
+	return c.count
 }
 
 // Box embeds a Rectangle and adds a Label. Because Rectangle is embedded
@@ -67,5 +81,6 @@ type Box struct {
 // area, formatted with two decimals. Demonstrate that b.Area() works via
 // promotion — do NOT redeclare Area on Box.
 func (b Box) Describe() string {
-	panic("TODO: implement Box.Describe")
+	// panic("TODO: implement Box.Describe")
+	return b.Label + ": " + fmt.Sprintf("%.2f", b.Area())
 }
