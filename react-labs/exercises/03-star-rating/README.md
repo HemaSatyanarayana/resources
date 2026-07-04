@@ -19,6 +19,14 @@ Fill in `displayValue`, `select`, the `filled` calc, and the two mouse handlers 
 npx vitest run exercises/03-star-rating
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#03-star-rating (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"Make it controlled."* — accept a `value` prop and call `onChange`; drop internal `selected` and read from props. Discuss controlled vs uncontrolled.

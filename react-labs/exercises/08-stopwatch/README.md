@@ -19,6 +19,14 @@ Implement `start`, `stop`, `reset`, and the cleanup effect in [`Stopwatch.jsx`](
 npx vitest run exercises/08-stopwatch
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#08-stopwatch (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"Why a ref and not state for the interval id?"* — you need to read/overwrite it without re-rendering, and it must persist across renders.

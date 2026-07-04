@@ -19,6 +19,14 @@ Implement `addTodo`, `toggle`, `remove`, and the `visible` derivation in [`TodoL
 npx vitest run exercises/02-todo-list
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#02-todo-list (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"Why is the index a bad key here?"* — deleting item 0 shifts every index down; React matches old keys to new positions and can carry over checkbox/focus state to the wrong row.

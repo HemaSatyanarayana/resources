@@ -19,6 +19,14 @@ Compute `totalPages`, `pageItems`, implement `goTo`, and set the two `disabled` 
 npx vitest run exercises/11-pagination
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#11-pagination (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"1000 pages — don't render 1000 buttons."* — window the page numbers: show current ±2 with `1 … 7 8 [9] 10 11 … 42` and ellipses. This is the real follow-up; think about the windowing formula.

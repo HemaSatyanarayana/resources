@@ -19,6 +19,14 @@ Implement `onKeyDown` and wire up `aria-selected` / `tabIndex` in [`Tabs.jsx`](T
 npx vitest run exercises/05-tabs
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#05-tabs (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"What's roving tabindex and why?"* — keeping every tab at `tabIndex={0}` forces a keyboard user to Tab through all of them; the ARIA pattern puts arrow keys in charge of moving *within* the widget and Tab moves *past* it.

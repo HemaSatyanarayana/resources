@@ -20,6 +20,8 @@ Implement `useToggle`, `usePrevious`, and `useLocalStorage` in [`hooks.js`](hook
 npx vitest run exercises/06-custom-hooks
 ```
 
+**Manual testing:** this is a hook-only exercise — there's no UI to render, so drive it through the test file above (or a scratch component).
+
 ## Interview follow-ups to expect
 
 - *"Why does `usePrevious` need a ref instead of state?"* — storing the previous value in state would trigger an extra render and create a loop; a ref updates silently after commit.

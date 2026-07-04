@@ -19,6 +19,14 @@ Implement `allChecked` / `someChecked` in `TreeNode` and `onToggle` in [`NestedC
 npx vitest run exercises/14-nested-checkboxes
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#14-nested-checkboxes (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"Why store leaves instead of a checked flag per node?"* — parent state is a pure function of its leaves, so deriving it can never drift; storing both means every toggle must update ancestors and descendants consistently.

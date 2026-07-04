@@ -18,6 +18,8 @@ Implement the effect body in [`useDebounce.js`](useDebounce.js): start a timeout
 npx vitest run exercises/07-use-debounce
 ```
 
+**Manual testing:** this is a hook-only exercise — there's no UI to render, so drive it through the test file above (or a scratch component).
+
 ## Interview follow-ups to expect
 
 - *"What happens without the cleanup?"* — every keystroke stacks a new timer; they all eventually fire, and the value flickers through the whole history instead of settling on the last one.

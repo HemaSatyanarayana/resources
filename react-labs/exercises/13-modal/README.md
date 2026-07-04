@@ -19,6 +19,14 @@ Implement the Escape effect and `onBackdropClick` in [`Modal.jsx`](Modal.jsx).
 npx vitest run exercises/13-modal
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#13-modal (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"Why a portal?"* — a modal rendered deep in the tree can be clipped by an ancestor's `overflow:hidden` or trapped under its `z-index`/stacking context; a portal to `body` sidesteps both.

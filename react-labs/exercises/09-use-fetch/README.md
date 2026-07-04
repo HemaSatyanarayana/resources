@@ -19,6 +19,8 @@ Implement the effect in [`useFetch.js`](useFetch.js). Tests stub `global.fetch`.
 npx vitest run exercises/09-use-fetch
 ```
 
+**Manual testing:** this is a hook-only exercise — there's no UI to render, so drive it through the test file above (or a scratch component).
+
 ## Interview follow-ups to expect
 
 - *"Two requests race — the first is slower and resolves last. What renders?"* — without the guard, the stale first response wins. The `ignore` flag (set in cleanup when url changed) discards it. `AbortController.abort()` additionally cancels the in-flight request.

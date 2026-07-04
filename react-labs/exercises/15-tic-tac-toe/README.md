@@ -19,6 +19,14 @@ Implement `calculateWinner`, `isDraw`, and `handleClick` in [`TicTacToe.jsx`](Ti
 npx vitest run exercises/15-tic-tac-toe
 ```
 
+Run the tests until green, then **try it in the browser**:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173/#15-tic-tac-toe (or pick it from the dropdown). Edits hot-reload. Tweak the demo props for this exercise in `dev/main.jsx`.
+
 ## Interview follow-ups to expect
 
 - *"Why not keep `winner` in state?"* — it's fully determined by `board`; a second copy can disagree with it after an update, and you'd have to remember to recompute it on every move. Deriving makes an inconsistent state unrepresentable.
