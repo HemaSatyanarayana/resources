@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 /**
  * Counter — the classic warm-up.
@@ -27,30 +27,47 @@ export default function Counter({
   max = Infinity,
   step = 1,
 }) {
-  const [count, setCount] = useState(initial)
+  const [count, setCount] = useState(initial);
 
   const increment = () => {
     // TODO: increase by `step`, clamped to `max`. Use a functional update.
-  }
+    setCount((prevCount) => {
+      const newCount = prevCount + step;
+      if (newCount >= min && newCount <= max) {
+        return newCount;
+      } else {
+        return prevCount;
+      }
+    });
+  };
 
   const decrement = () => {
     // TODO: decrease by `step`, clamped to `min`.
-  }
+    setCount((prevCount) => {
+      const newCount = prevCount - step;
+      if (newCount >= min && newCount <= max) {
+        return newCount;
+      } else {
+        return prevCount;
+      }
+    });
+  };
 
   const reset = () => {
     // TODO: return to `initial`.
-  }
+    setCount(initial);
+  };
 
   return (
     <div>
       <output data-testid="count">{count}</output>
-      <button onClick={decrement} disabled={/* TODO: at min? */ false}>
+      <button onClick={decrement} disabled={count <= min}>
         Decrement
       </button>
-      <button onClick={increment} disabled={/* TODO: at max? */ false}>
+      <button onClick={increment} disabled={count >= max}>
         Increment
       </button>
       <button onClick={reset}>Reset</button>
     </div>
-  )
+  );
 }
