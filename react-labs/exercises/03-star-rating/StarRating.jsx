@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 /**
  * StarRating — hover vs selected state, derived rendering.
@@ -21,37 +21,38 @@ import { useState } from 'react'
  *   - Clicking star N selects N and calls onChange(N).
  */
 export default function StarRating({ count = 5, defaultValue = 0, onChange }) {
-  const [selected, setSelected] = useState(defaultValue)
-  const [hovered, setHovered] = useState(null)
+  const [selected, setSelected] = useState(defaultValue);
+  const [hovered, setHovered] = useState(null);
 
-  const displayValue = /* TODO: hovered ?? selected */ selected
+  const displayValue = hovered ?? selected;
 
   const select = (n) => {
-    // TODO: set selected to n and call onChange?.(n)
-  }
+    setSelected(n);
+    onChange?.(n);
+  };
 
   return (
     <div>
       {Array.from({ length: count }, (_, i) => {
-        const position = i + 1
-        const filled = /* TODO: position <= displayValue */ false
+        const position = i + 1;
+        const filled = position <= displayValue;
         return (
           <button
             key={position}
-            aria-label={`Rate ${position} star${position === 1 ? '' : 's'}`}
+            aria-label={`Rate ${position} star${position === 1 ? "" : "s"}`}
             data-filled={filled}
             onClick={() => select(position)}
             onMouseEnter={() => {
-              /* TODO: setHovered(position) */
+              setHovered(position);
             }}
             onMouseLeave={() => {
-              /* TODO: setHovered(null) */
+              setHovered(null);
             }}
           >
-            {filled ? '★' : '☆'}
+            {filled ? "★" : "☆"}
           </button>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
