@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 /**
  * Accordion — conditional rendering + single vs multi-open state.
@@ -18,18 +18,25 @@ import { useState } from 'react'
  *   - allowMultiple=true: items open/close independently.
  */
 export default function Accordion({ items = [], allowMultiple = false }) {
-  const [openIds, setOpenIds] = useState([])
+  const [openIds, setOpenIds] = useState([]);
 
   const toggle = (id) => {
     // TODO: update openIds.
     //  - if the id is already open, close it.
     //  - otherwise open it: append when allowMultiple, else replace with [id].
-  }
+    setOpenIds((prevIds) => {
+      if (prevIds.includes(id)) {
+        return prevIds.filter((openId) => openId !== id);
+      } else {
+        return allowMultiple ? [...prevIds, id] : [id];
+      }
+    });
+  };
 
   return (
     <div>
       {items.map((item) => {
-        const isOpen = openIds.includes(item.id)
+        const isOpen = openIds.includes(item.id);
         return (
           <div key={item.id}>
             <button aria-expanded={isOpen} onClick={() => toggle(item.id)}>
@@ -37,8 +44,8 @@ export default function Accordion({ items = [], allowMultiple = false }) {
             </button>
             {isOpen && <div role="region">{item.content}</div>}
           </div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
