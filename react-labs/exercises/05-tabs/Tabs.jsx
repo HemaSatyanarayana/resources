@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 /**
  * Tabs — active-index state, keyboard navigation, ARIA tab semantics.
@@ -19,34 +19,46 @@ import { useState } from 'react'
  *     ArrowLeft to the previous (wrapping), and activates it.
  */
 export default function Tabs({ tabs = [], defaultActiveId }) {
-  const [activeId, setActiveId] = useState(defaultActiveId ?? tabs[0]?.id)
+  const [activeId, setActiveId] = useState(defaultActiveId ?? tabs[0]?.id);
 
-  const activeTab = tabs.find((t) => t.id === activeId)
+  const activeTab = tabs.find((t) => t.id === activeId);
 
   const onKeyDown = (e) => {
     // TODO: on ArrowRight / ArrowLeft, compute the next index (wrapping with
     // modulo) and setActiveId to that tab's id.
-  }
+    setActiveId((prevId) => {
+      if (e.key === "ArrowRight") {
+        return tabs[(tabs.findIndex((t) => t.id === prevId) + 1) % tabs.length]
+          .id;
+      } else if (e.key === "ArrowLeft") {
+        return tabs[
+          (tabs.findIndex((t) => t.id === prevId) - 1 + tabs.length) %
+            tabs.length
+        ].id;
+      }
+      return prevId;
+    });
+  };
 
   return (
     <div>
       <div role="tablist" onKeyDown={onKeyDown}>
         {tabs.map((tab) => {
-          const isActive = tab.id === activeId
+          const isActive = tab.id === activeId;
           return (
             <button
               key={tab.id}
               role="tab"
-              aria-selected={/* TODO: isActive */ false}
-              tabIndex={/* TODO: isActive ? 0 : -1 */ 0}
+              aria-selected={isActive}
+              tabIndex={isActive ? 0 : -1}
               onClick={() => setActiveId(tab.id)}
             >
               {tab.label}
             </button>
-          )
+          );
         })}
       </div>
       <div role="tabpanel">{activeTab?.content}</div>
     </div>
-  )
+  );
 }
