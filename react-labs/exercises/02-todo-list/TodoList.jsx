@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 /**
  * TodoList — controlled input + immutable list updates + filtering.
@@ -17,27 +17,62 @@ import { useState } from 'react'
  *   - Completed todos render a checked checkbox.
  *   - Never mutate state — always build new arrays/objects.
  */
-let nextId = 1
+let nextId = 1;
 
 export default function TodoList() {
-  const [todos, setTodos] = useState([]) // [{ id, text, completed }]
-  const [text, setText] = useState('')
-  const [filter, setFilter] = useState('all') // 'all' | 'active' | 'completed'
+  const [todos, setTodos] = useState([]); // [{ id, text, completed }]
+  const [text, setText] = useState("");
+  const [filter, setFilter] = useState("all"); // 'all' | 'active' | 'completed'
 
   const addTodo = () => {
     // TODO: trim `text`; if empty, do nothing. Otherwise append
     // { id: nextId++, text: trimmed, completed: false } and clear the input.
-  }
+
+    if (text.trim() === "") {
+      return;
+    }
+
+    setTodos((todos) => [
+      ...todos,
+      { id: nextId++, text: text.trim(), completed: false },
+    ]);
+
+    setText("");
+    nextId++;
+  };
 
   const toggle = (id) => {
     // TODO: return a NEW array where the matching todo's `completed` is flipped.
-  }
+    if (todos.length === 0) {
+      return;
+    }
+
+    setTodos((todos) =>
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
 
   const remove = (id) => {
     // TODO: filter out the todo with this id.
-  }
 
-  const visible = todos // TODO: derive the visible list from `filter`.
+    if (todos.length === 0) {
+      return;
+    }
+
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  };
+
+  const visible = todos.filter((todo) => {
+    if (filter === "all") {
+      return true;
+    } else if (filter === "active") {
+      return !todo.completed;
+    } else if (filter === "completed") {
+      return todo.completed;
+    }
+  }); // TODO: derive the visible list from `filter`.
 
   return (
     <div>
@@ -49,9 +84,9 @@ export default function TodoList() {
       <button onClick={addTodo}>Add</button>
 
       <div>
-        <button onClick={() => setFilter('all')}>All</button>
-        <button onClick={() => setFilter('active')}>Active</button>
-        <button onClick={() => setFilter('completed')}>Completed</button>
+        <button onClick={() => setFilter("all")}>All</button>
+        <button onClick={() => setFilter("active")}>Active</button>
+        <button onClick={() => setFilter("completed")}>Completed</button>
       </div>
 
       <ul>
@@ -70,5 +105,5 @@ export default function TodoList() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
