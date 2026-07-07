@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 /**
  * useFetch — data fetching with loading / error / data states and cleanup.
@@ -17,7 +17,11 @@ import { useState, useEffect } from 'react'
  *     Use an `ignore` flag captured by the effect's cleanup.
  */
 export function useFetch(url) {
-  const [state, setState] = useState({ data: null, loading: true, error: null })
+  const [state, setState] = useState({
+    data: null,
+    loading: true,
+    error: null,
+  });
 
   useEffect(() => {
     // TODO:
@@ -26,7 +30,37 @@ export function useFetch(url) {
     //   fetch(url) -> check res.ok -> res.json() -> setState(data) unless ignore
     //   .catch -> setState(error) unless ignore
     //   return () => { ignore = true }
-  }, [url])
+    let ignore = false;
+    setState({ data: null, loading: true, error: null });
 
-  return state
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (!ignore) {
+          setState({
+            data,
+            loading: false,
+            error: null,
+          });
+        }
+      })
+      .catch((err) => {
+        if (!ignore) {
+          setState({
+            data: null,
+            loading: false,
+            error: err,
+          });
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [url]);
+
+  return state;
 }
