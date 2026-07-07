@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 /**
  * useDebounce — returns a copy of `value` that only updates after `value` has
@@ -14,13 +14,20 @@ import { useState, useEffect } from 'react'
  * exercise — an effect that sets a timeout MUST clear it on cleanup.
  */
 export function useDebounce(value, delay = 500) {
-  const [debounced, setDebounced] = useState(value)
+  const [debounced, setDebounced] = useState(value);
 
   useEffect(() => {
     // TODO:
     //   1. start a setTimeout that calls setDebounced(value) after `delay`
     //   2. return a cleanup function that clears that timeout
-  }, [value, delay])
+    const timer = setTimeout(() => {
+      setDebounced(value);
+    }, delay);
 
-  return debounced
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debounced;
 }
