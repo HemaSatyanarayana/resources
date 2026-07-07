@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useCallback } from "react";
 
 /**
  * useToggle — boolean state with a memoized toggle.
@@ -11,14 +11,15 @@ import { useState, useRef, useEffect, useCallback } from 'react'
  * `toggle` must be stable across renders (wrap it in useCallback).
  */
 export function useToggle(initial = false) {
-  const [value, setValue] = useState(initial)
+  const [value, setValue] = useState(initial);
 
   const toggle = useCallback((next) => {
     // TODO: if `next` is a boolean, set to it; otherwise flip the current value.
     // Use a functional update so it doesn't depend on `value`.
-  }, [])
+    setValue((prev) => (typeof next === "boolean" ? next : !prev));
+  }, []);
 
-  return [value, toggle, setValue]
+  return [value, toggle, setValue];
 }
 
 /**
@@ -29,12 +30,15 @@ export function useToggle(initial = false) {
  * then update it in an effect (which runs *after* render commits).
  */
 export function usePrevious(value) {
-  const ref = useRef(undefined)
+  const ref = useRef(undefined);
 
   // TODO: after each commit, store the current value in ref.current
   //       so the NEXT render sees it as "previous".
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
 
-  return ref.current
+  return ref.current;
 }
 
 /**
@@ -47,12 +51,16 @@ export function usePrevious(value) {
 export function useLocalStorage(key, initial) {
   const [value, setValue] = useState(() => {
     // TODO: read localStorage[key]; if present, JSON.parse it; else return `initial`.
-    return initial
-  })
+    if (window.localStorage[key]) {
+      return JSON.parse(window.localStorage[key]);
+    }
+    return initial;
+  });
 
   useEffect(() => {
     // TODO: write JSON.stringify(value) to localStorage[key].
-  }, [key, value])
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
 
-  return [value, setValue]
+  return [value, setValue];
 }
