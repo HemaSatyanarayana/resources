@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from "react";
 
 /**
  * Stopwatch — useRef for the interval id, no stale closures, effect cleanup.
@@ -18,27 +18,41 @@ import { useState, useRef, useEffect } from 'react'
  *   - Use a functional update inside the tick so you never read stale `ms`.
  */
 export default function Stopwatch() {
-  const [ms, setMs] = useState(0)
-  const [running, setRunning] = useState(false)
-  const intervalRef = useRef(null)
+  const [ms, setMs] = useState(0);
+  const [running, setRunning] = useState(false);
+  const intervalRef = useRef(null);
 
   const start = () => {
     // TODO: if already running, do nothing. Otherwise set running true and
     // start an interval (100ms) that does setMs(m => m + 100). Save its id in
     // intervalRef.current.
-  }
+    setRunning(true);
+    intervalRef.current = setInterval(() => {
+      setMs((ms) => ms + 100);
+    }, 100);
+  };
 
   const stop = () => {
     // TODO: set running false, clearInterval(intervalRef.current), null it out.
-  }
+    setRunning(false);
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  };
 
   const reset = () => {
     // TODO: stop, then setMs(0).
-  }
+    setRunning(false);
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+    setMs(0);
+  };
 
   useEffect(() => {
     // TODO: cleanup on unmount — clear any live interval.
-  }, [])
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <div>
@@ -51,5 +65,5 @@ export default function Stopwatch() {
       </button>
       <button onClick={reset}>Reset</button>
     </div>
-  )
+  );
 }
