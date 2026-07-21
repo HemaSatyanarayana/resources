@@ -1,0 +1,23 @@
+[project]
+name = "agents-concepts-labs"
+version = "0.1.0"
+description = "Hands-on LangGraph labs: build agents from the graph up"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "langchain>=1.3.14",
+    "langchain-core>=1.4.9",
+    "langchain-openai>=1.3.5",
+    "langgraph>=1.2.9",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "python-dotenv>=1.2.2",
+]
+
+[tool.pytest.ini_options]
+# Makes `labgraph` importable from every exercise directory without installing.
+pythonpath = ["."]
+testpaths = ["exercises"]
+asyncio_mode = "auto"
+# Exercises are scaffolds: an unfinished one raises TODO. Keep output readable.
+addopts = "-q --tb=short"
